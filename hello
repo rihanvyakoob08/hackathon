@@ -1,1 +1,64 @@
-hi
+sequenceDiagram
+
+actor Farmer
+
+participant Sarvam
+participant Gateway
+participant OpenAI
+participant Router
+
+participant Disease
+participant Weather
+participant Scheme
+participant Grievance
+
+participant SQLite
+participant Analytics
+
+Farmer->>Sarvam: Voice Input
+
+Sarvam->>Gateway: Text
+
+Gateway->>OpenAI: Understand Request
+
+OpenAI->>Router: Intent
+
+alt Disease
+
+Router->>Disease: Process
+
+Disease-->>OpenAI: Result
+
+else Weather
+
+Router->>Weather: Process
+
+Weather-->>OpenAI: Result
+
+else Scheme
+
+Router->>Scheme: Process
+
+Scheme-->>OpenAI: Result
+
+else Grievance
+
+Router->>Grievance: Process
+
+Grievance->>SQLite: Store
+
+SQLite-->>Grievance: Ticket ID
+
+Grievance-->>OpenAI: Result
+
+end
+
+OpenAI-->>Sarvam: Final Response
+
+Sarvam-->>Farmer: Voice Response
+
+SQLite->>Analytics: Events
+
+Analytics->>Analytics: Pattern Detection
+
+Analytics-->>Officer: Insights Dashboard
